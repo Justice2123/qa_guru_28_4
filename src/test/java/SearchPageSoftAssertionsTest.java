@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class SearchPageSoftAssertions {
+public class SearchPageSoftAssertionsTest {
 
     @BeforeAll
     static void beforeAll() {
@@ -28,8 +28,18 @@ public class SearchPageSoftAssertions {
         $("#wiki-body").shouldHave(text("Welcome to the selenide wiki!"));
         $("#wiki-pages-filter").setValue("SoftAssertions");
         $(byText("SoftAssertions")).shouldBe(visible).click();
-        $$ (".markdown-heading h4").findBy(text("3. Using JUnit5 extend test class:")).shouldBe(visible);
-
+        $("#wiki-body").shouldHave(text("@ExtendWith({SoftAssertsExtension.class}) " +
+                "class Tests { " +
+                "  @Test " +
+                "  void test() { " +
+                "    Configuration.assertionMode = SOFT; " +
+                "    open(\"page.html\"); " +
+                " " +
+                "    $(\"#first\").should(visible).click(); " +
+                "    $(\"#second\").should(visible).click(); " +
+                "  } " +
+                "}"));
+        
 
     }
 
