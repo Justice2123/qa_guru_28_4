@@ -18,7 +18,7 @@ public class SearchPageSoftAssertionsTest {
     }
 
     @Test
-    void searchPageOnGithub() {
+    void searchPageOnGithubTest() {
         open("https://github.com/");
         $("div.search-input-container").click();
         $("#query-builder-test").setValue("selenide").pressEnter();
